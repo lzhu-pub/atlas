@@ -3,6 +3,7 @@
 #include "core/ActionGroup.hpp"
 #include "core/AtlasAllocatorWrapper.hpp"
 #include "core/AtlasInst.hpp"
+#include "core/VectorState.hpp"
 
 #include "core/observers/InstructionLogger.hpp"
 #include "core/CoSimQuery.hpp"
@@ -152,6 +153,13 @@ namespace atlas
         const SimState* getSimState() const { return &sim_state_; }
 
         SimState* getSimState() { return &sim_state_; }
+
+        const VectorState* getVectorState() const
+        {
+            return &vector_state_;
+        } // TODO: what's the point making it private?
+
+        VectorState* getVectorState() { return &vector_state_; }
 
         const AtlasInstPtr & getCurrentInst() { return sim_state_.current_inst; }
 
@@ -343,6 +351,9 @@ namespace atlas
 
         //! Simulation state
         SimState sim_state_;
+
+        //! Vecotr state
+        VectorState vector_state_;
 
         // Increment PC Action
         ActionGroup* incrementPc_(AtlasState* state);
